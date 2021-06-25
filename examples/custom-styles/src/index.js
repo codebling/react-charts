@@ -8,35 +8,48 @@ import useLagRadar from "./useLagRadar";
 import ResizableBox from "./ResizableBox";
 import "./styles.css";
 
-export default function App() {
-  const [{ activeSeriesIndex, activeDatumIndex }, setState] = React.useState({
-    activeSeriesIndex: -1,
-    activeDatumIndex: -1
-  });
+export default class App  extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeSeriesIndex: -1,
+      activeDatumIndex: -1,
+    };
+  }   
+  
+  
+  render() {
+    const {
+      activeSeriesIndex, 
+      activeDatumIndex,
+    } = this.state;
 
-  return (
-    <div>
-      {JSON.stringify({ activeSeriesIndex, activeDatumIndex }, null, 2)}
-      <MyChart
-        elementType="line"
-        setState={setState}
-        activeDatumIndex={activeDatumIndex}
-        activeSeriesIndex={activeSeriesIndex}
-      />
-      <MyChart
-        elementType="area"
-        setState={setState}
-        activeDatumIndex={activeDatumIndex}
-        activeSeriesIndex={activeSeriesIndex}
-      />
-      <MyChart
-        elementType="bar"
-        setState={setState}
-        activeDatumIndex={activeDatumIndex}
-        activeSeriesIndex={activeSeriesIndex}
-      />
-    </div>
-  );
+    const setState = newState => this.setState(newState);
+    
+    return (
+      <div>
+        {JSON.stringify({ activeSeriesIndex, activeDatumIndex }, null, 2)}
+        <MyChart
+          elementType="line"
+          setState={setState}
+          activeDatumIndex={activeDatumIndex}
+          activeSeriesIndex={activeSeriesIndex}
+        />
+        <MyChart
+          elementType="area"
+          setState={setState}
+          activeDatumIndex={activeDatumIndex}
+          activeSeriesIndex={activeSeriesIndex}
+        />
+        <MyChart
+          elementType="bar"
+          setState={setState}
+          activeDatumIndex={activeDatumIndex}
+          activeSeriesIndex={activeSeriesIndex}
+        />
+      </div>
+    );
+  }
 }
 
 function MyChart({
